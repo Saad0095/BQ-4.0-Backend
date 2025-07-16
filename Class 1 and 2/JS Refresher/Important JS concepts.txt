@@ -1,0 +1,252 @@
+/** Basics of JS **/
+
+JavaScript is a "Single-threaded Synchronous language" which means it can execute one line of code at a time and in specific order
+
+Lexical scope in JavaScript refers to the scope determined by the structure of the code as written, specifically by the location of functions and blocks within the source code. In JavaScript, the scope of a variable or function is defined by its position in the source code, and nested functions have access to variables declared in their outer scope.
+
+Key Concepts of Lexical Scope
+Function Scope: Variables declared inside a function are only accessible within that function.
+Block Scope: Variables declared with let and const inside a block (e.g., within curly braces {}) are only accessible within that block.
+Global Scope: Variables declared outside any function or block are accessible anywhere in the code.
+Examples and Explanation
+Global Scope
+
+let globalVar = "I am global";
+function globalScopeExample() {
+    console.log(globalVar); // Output: I am global
+}
+globalScopeExample();
+globalVar is declared in the global scope, so it is accessible inside the globalScopeExample function.
+
+
+
+Function Scope
+function functionScopeExample() {
+    let localVar = "I am local";
+    console.log(localVar); // Output: I am local
+}
+functionScopeExample();
+console.log(localVar); // Error: localVar is not defined
+localVar is declared inside the functionScopeExample function, so it is only accessible within that function.
+
+Block Scope
+function blockScopeExample() {
+    if (true) {
+        let blockVar = "I am block-scoped";
+        console.log(blockVar); // Output: I am block-scoped
+    }
+    console.log(blockVar); // Error: blockVar is not defined
+}
+blockScopeExample();
+blockVar is declared with let inside an if block, so it is only accessible within that block.
+Lexical Scope in Nested Functions
+Example of Lexical Scope
+function outerFunction() {
+    let outerVar = "I am outer";
+    function innerFunction() {
+        let innerVar = "I am inner";
+        console.log(outerVar); // Output: I am outer
+        console.log(innerVar); // Output: I am inner
+    }
+    innerFunction();
+    console.log(innerVar); // Error: innerVar is not defined
+}
+outerFunction();
+innerFunction has access to outerVar because it is declared in the outer function (outerFunction). This is an example of lexical scope: the inner function can access variables from its outer lexical environment.
+
+Summary
+Lexical Scope: The scope determined by the position of functions and blocks within the source code.
+Function Scope: Variables declared inside a function are accessible only within that function.
+Block Scope: Variables declared with let and const inside a block are accessible only within that block.
+Global Scope: Variables declared outside any function or block are accessible anywhere in the code.
+Nested Functions: Inner functions have access to variables declared in their outer functions due to lexical scope.
+Closures: Functions that preserve access to their lexical scope even after the outer function has completed execution.
+Understanding lexical scope is crucial for mastering variable accessibility and lifetime in JavaScript, enabling more effective and predictable code behavior.
+
+
+
+
+/** Primitive v/s Non-Primitive Data Type **/
+
+In JavaScript, data types can be categorized into two main groups: primitive types and non-primitive types. Understanding the distinction between these types is fundamental to working with JavaScript.
+Primitive Types
+Primitive types are the most basic data types in JavaScript. They are immutable, meaning their values cannot be changed once created. Here are the primitive types:
+Number: Represents both integer and floating-point numbers.
+let num = 42;
+let pi = 3.14;
+
+String: Represents a sequence of characters.
+let greeting = "Hello, world!";
+
+Boolean: Represents a logical entity and can have two values: true or false.
+let isAvailable = true;
+
+Undefined: Indicates that a variable has not been assigned a value.
+let something;
+console.log(something); // Output: undefined
+
+Null: Represents the intentional absence of any object value.
+let emptyValue = null;
+
+Symbol: A unique and immutable value used as the key of an object property.
+let symbol = Symbol('unique');
+
+
+Non-Primitive Types
+Non-primitive types, also known as reference types, are more complex data structures. Unlike primitive types, non-primitive types are mutable, meaning their values can be changed. The main non-primitive type in JavaScript is:
+Object: A collection of properties, where each property is defined as a key-value pair. Objects can also include other objects, functions, and arrays.
+
+let person = {
+    name: "Alice",
+    age: 30
+};
+
+Array: A type of object used for storing multiple values in an ordered list.
+let numbers = [1, 2, 3, 4, 5];
+
+
+Function: A callable object that executes a block of code.
+
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+Key Differences
+
+Storage:
+Primitive types: Stored directly in the variable's location in memory.
+Non-primitive types: Stored as a reference to the location in memory where the object is stored.
+
+Mutability:
+Primitive types: Immutable (cannot change the value itself, but can reassign the variable to a new value).
+Non-primitive types: Mutable (can change the properties or elements without changing the reference).
+
+Copying:
+Primitive types: When assigned or passed, the actual value is copied.
+let a = 10;
+let b = a; // b is a copy of a
+b = 20;
+console.log(a); // Output: 10
+console.log(b); // Output: 20
+
+Non-primitive types: When assigned or passed, only the reference is copied.
+let obj1 = { name: "Alice" };
+let obj2 = obj1; // obj2 is a reference to obj1
+obj2.name = "Bob";
+console.log(obj1.name); // Output: Bob
+console.log(obj2.name); // Output: Bob
+
+Summary
+Primitive Types: Number, String, Boolean, Undefined, Null, Symbol, BigInt.
+Non-Primitive Types: Object (including Array and Function).
+By understanding these categories and their characteristics, you can manage and manipulate data more effectively in JavaScript.
+
+
+/** Types pf Functions **/
+
+Explaining the difference between a regular function and an arrow function to a student can be approached by highlighting the syntax, usage, and behavior differences. Here’s a step-by-step guide to help you explain:
+1. Syntax Differences
+Regular Function
+Function Declaration
+function add(a, b) {
+    return a + b;
+}
+console.log(add(2, 3)); // Output: 5
+
+Function Expression
+const add = function(a, b) {
+    return a + b;
+};
+
+console.log(add(2, 3)); // Output: 5
+
+Arrow Function
+const add = (a, b) => {
+    return a + b;
+};
+console.log(add(2, 3)); // Output: 5
+Concise Arrow Function
+const add = (a, b) => a + b;
+console.log(add(2, 3)); // Output: 5
+
+2. Implicit Returns
+Arrow functions allow for implicit returns for concise single-line expressions.
+const greet = name => `Hello, ${name}!`;
+console.log(greet('Alice')); // Output: Hello, Alice!
+
+3. ‘this’ Keyword Behavior
+Regular Function
+The value of this is dynamic and depends on how the function is called.
+const obj = {
+    value: 42,
+    getValue: function() {
+        return this.value;
+    }
+};
+console.log(obj.getValue()); // Output: 42
+
+
+
+
+Arrow Function
+Arrow functions do not have their own this context. Instead, they inherit this from the surrounding (lexical) scope.
+const obj = {
+    value: 42,
+    getValue: () => {
+        return this.value;
+    }
+};
+console.log(obj.getValue()); // Output: undefined
+4. Usage Contexts
+Regular Functions
+Suitable for methods in objects or classes.
+Can be used as constructors (with the new keyword).
+Arrow Functions
+Great for callbacks and functional programming techniques.
+Cannot be used as constructors.
+
+
+
+
+5. Practical Examples
+Example of Regular Function in an Object Method
+const person = {
+    name: 'Alice',
+    greet: function() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+};
+person.greet(); // Output: Hello, my name is Alice
+
+Example of Arrow Function in Callbacks
+const numbers = [1, 2, 3];
+const doubled = numbers.map(number => number * 2);
+console.log(doubled); // Output: [2, 4, 6]
+
+6. Summary of Key Differences
+Syntax:
+Regular functions: more verbose.
+Arrow functions: concise, especially for single-line returns.
+‘this’ Keyword:
+Regular functions: this is dynamic and changes based on how the function is called.
+Arrow functions: this is lexically bound, taking this from the surrounding code.
+Use Cases:
+Regular functions: suited for object methods and constructors.
+Arrow functions: best for short functions, especially in functional programming patterns and callbacks.
+Demonstration Code
+// Regular Function
+function regularFunction() {
+    console.log('This is a regular function');
+}
+
+// Arrow Function
+const arrowFunction = () => {
+    console.log('This is an arrow function');
+};
+
+regularFunction(); // Output: This is a regular function
+arrowFunction();   // Output: This is an arrow function
+
+By breaking down these points and providing practical examples, you can help students grasp the key differences between regular functions and arrow functions in JavaScript.
+
+
