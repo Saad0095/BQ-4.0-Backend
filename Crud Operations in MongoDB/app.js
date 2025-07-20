@@ -1,15 +1,12 @@
-const express = require("express");
-require('./db/index')
+import express from "express"
+import './db/index.js'
+import productRoutes from "./routes/productRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 const app = express();
 app.use(express.json());
 
-const userRoutes = require('./models/user')
-
-app.get("/", (req, res) => {
-  res.send("Hello!");
-});
-
-app.use('user', userRoutes)
+app.use('/api/product', productRoutes)
+app.use('/api/order', orderRoutes)
 
 app.listen(3000);

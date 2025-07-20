@@ -1,11 +1,11 @@
-const { Schema, model } = require("mongoose");
+// import { Schema, model } from "mongoose";
 
-const userSchema = new Schema({
-  name: String,
-  email: { type: String, required: true },
-  address: String,
-  createdAt: { type: Date, default: Date.now() },
-});
+// const userSchema = new Schema({
+//   name: String,
+//   email: { type: String, required: true },
+//   address: String,
+//   createdAt: { type: Date, default: Date.now() },
+// });
 
-const User = model("User", userSchema);
-module.exports = User;
+// const User = model("User", userSchema);
+// export default User;
