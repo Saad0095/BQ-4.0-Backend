@@ -11,11 +11,11 @@ export const getAllProducts = async (req, res) => {
 
 export const getProduct = async (req, res) => {
   try {
-    const product = await Product.findById(res.params.id);
-    if(!product) return res.status(400).json({message: "Product Not Found!"})
+    const product = await Product.findById(req.params.id);
+    if(!product) return res.status(404).json({message: "Product Not Found!"})
     res.json(product);
   } catch (error) {
-    res.status(400).json({ error: error.msg });
+    res.status(500).json({ error: error.msg });
   }
 };
 
@@ -24,6 +24,6 @@ export const createProduct = async (req, res) => {
     const product = await Product.create(req.body);
     res.json(product);
   } catch (error) {
-    res.status(400).json({ error: error.msg });
+    res.status(500).json({ error: error.msg });
   }
 };
