@@ -1,0 +1,54 @@
+🔄 What is a Middleware in Express?
+A middleware is a function in Express that runs between the request and the response. It can:
+
+Modify the req or res objects
+
+End the request-response cycle
+
+Or pass control to the next middleware using next()
+
+🧩 Syntax:
+js
+Copy
+Edit
+(req, res, next) => {
+  // your code
+  next(); // call the next middleware or route
+}
+🔧 Example:
+js
+Copy
+Edit
+const logger = (req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next(); // continue to next
+};
+
+app.use(logger); // applies to every request
+📌 Common Uses of Middleware:
+Logging requests
+
+Validating data (like using Joi)
+
+Authentication
+
+Error handling
+
+Serving static files
+
+Parsing request bodies (e.g. express.json())
+
+🔁 How it Works in a Route:
+js
+Copy
+Edit
+app.get("/profile", authMiddleware, (req, res) => {
+  res.send("Your profile");
+});
+authMiddleware runs first
+
+If user is valid, it calls next()
+
+Then your /profile route runs
+
+Would you like me to show a real middleware flow with console.log() to see how next() works in action?

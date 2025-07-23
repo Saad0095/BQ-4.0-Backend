@@ -12,15 +12,15 @@ export const createOrder = async (req, res) => {
       if (!product) {
         return res.status(404).json({ error: "Product not found!" });
       }
-      if (product.quantity < item.quantity) {
-        return res.status(400).json({ error: "Item Already Sold Out!" });
-      }
+      // if (product.quantity < item.quantity) {
+      // return res.status(400).json({ error: "Item Already Sold Out!" });
+      // }
       total += product.price * item.quantity;
     }
     const order = await Order.create({ products, total, status, customer });
     res.json(order);
   } catch (error) {
-    res.status(500).json({ error: error.message  });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -29,7 +29,7 @@ export const getAllOrders = async (req, res) => {
     const orders = await Order.find().populate(`products.productId`);
     res.json(orders);
   } catch (error) {
-    res.status(500).json({ error: error.message  });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -41,7 +41,7 @@ export const getOrder = async (req, res) => {
     if (!order) return res.status(404).json({ error: "Order not found!" });
     res.json(order);
   } catch (error) {
-    res.status(500).json({ error: error.message  });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -51,20 +51,25 @@ export const checkOrderStatus = async (req, res) => {
     if (!status) return res.status(404).json({ error: "Order not found!" });
     res.json(status);
   } catch (error) {
-    res.status(500).json({ error: error.message  });
+    res.status(500).json({ error: error.message });
   }
 };
 
 export const updateOrderStatus = async (req, res) => {
   try {
     const { status } = req.body;
-    const updatedOrder = await Order.findByIdAndUpdate(req.params.id, {status}, {
-      new: true,
-      runValidators: true,
-    });
-    if (!updatedOrder) return res.status(404).json({ error: "Order not found!" });
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    if (!updatedOrder)
+      return res.status(404).json({ error: "Order not found!" });
     res.json(updatedOrder);
   } catch (error) {
-    res.status(500).json({ error: error.message  });
+    res.status(500).json({ error: error.message });
   }
 };
