@@ -4,7 +4,8 @@ import {
   deleteTodo,
   getTodos,
 } from "../controllers/todoController.js";
-const router = Router();
+
+const router = Router({mergeParams: true});
 
 router.get("/", getTodos);
 router.post("/", createTodo);
