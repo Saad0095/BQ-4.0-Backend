@@ -14,7 +14,7 @@ export const getTodos = async (req, res) => {
 export const createTodo = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const { task, isDone } = req.body;
+    const { task, category, isDone } = req.body;
 
     // const presentTasks = await Todo.find();
     // presentTasks.forEach((t) => {
@@ -22,7 +22,7 @@ export const createTodo = async (req, res) => {
     //     return res.status(400).json({ message: "Task already exits" });
     // });
 
-    const todo = await Todo.create({ userId, task, isDone });
+    const todo = await Todo.create({ userId, task, category, isDone });
     res.json({ msg: "Product successfully created", todo });
   } catch (error) {
     if (error.code) {
