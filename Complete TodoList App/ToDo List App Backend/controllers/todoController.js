@@ -26,8 +26,25 @@ export const createTodo = async (req, res) => {
     res.json({ msg: "Product successfully created", todo });
   } catch (error) {
     if (error.code) {
-      return res.status(400).json({ message: "Task already exits for this user." });
+      return res
+        .status(400)
+        .json({ message: "Task already exits for this user." });
     }
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const markTodoDone = async (req, res) => {
+  try {
+    const { isDone } = req.body;
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      req.params.id,
+      { isDone },
+      { new: true }
+    );
+    if (!deleted) res.json({ message: "Failed to Update todo!" });
+    res.json(updatedTodo);
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };

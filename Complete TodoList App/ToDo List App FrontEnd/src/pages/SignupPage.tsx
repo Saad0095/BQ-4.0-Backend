@@ -18,12 +18,13 @@ const SignupPage = () => {
     try {
       const { data } = await axios.post('http://localhost:3000/api/user/signup', form)
       toast.success(data.message);
+      setForm({ name: "", email: "", password: "" })
       setTimeout(() => {
         navigate("/todolist")
-
       }, 2000);
     } catch (error: any) {
-      toast.error(error);
+      toast.error(error.message);
+      console.log(error.message);
     }
   };
 
