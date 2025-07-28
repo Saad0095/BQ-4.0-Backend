@@ -4,8 +4,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
+interface Form {
+  name: string,
+  email: string,
+  password: string
+}
+
 const SignupPage = () => {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState<Form>({ name: "", email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate()
 
@@ -19,6 +25,7 @@ const SignupPage = () => {
       const { data } = await axios.post('http://localhost:3000/api/user/signup', form)
       toast.success(data.message);
       setForm({ name: "", email: "", password: "" })
+      localStorage.setItem("User Id", data.user._id)
       setTimeout(() => {
         navigate("/todolist")
       }, 2000);
