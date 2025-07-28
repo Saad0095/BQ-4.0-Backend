@@ -16,7 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use("/api/:userId/todos", todoRoutes);
+app.use("/api/todos", todoRoutes);
 app.use("/api/user", userRoutes);
 
 app.listen(3000, () => {

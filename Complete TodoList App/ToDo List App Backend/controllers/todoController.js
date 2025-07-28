@@ -3,8 +3,6 @@ import Todo from "../models/todo.js";
 export const getTodos = async (req, res) => {
   try {
     const todos = await Todo.find({ userId: req.params.userId });
-    if (todos.length === 0)
-      return res.status(404).json({ message: "Todos Not Found!" });
     res.json(todos);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -8,12 +8,12 @@ import {
 import validate from "../middleware/validate.js";
 import { todoSchema } from "../validators/todoValidator.js";
 
-const router = Router({ mergeParams: true });
+const router = Router();
 
-router.get("/", getTodos);
-router.post("/", validate(todoSchema), createTodo);
-router.put("/:id", markTodoDone);
-router.delete("/:id", deleteTodo);
+router.get("/:userId", getTodos);
+router.post("/:userId", validate(todoSchema), createTodo);
+router.put("/:userId/:id", markTodoDone);
+router.delete("/:userId/:id", deleteTodo);
 
 const todoRoutes = router;
 export default router;

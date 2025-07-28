@@ -25,7 +25,7 @@ const SignupPage = () => {
       const { data } = await axios.post('http://localhost:3000/api/user/signup', form)
       toast.success(data.message);
       setForm({ name: "", email: "", password: "" })
-      localStorage.setItem("User Id", data.user._id)
+      localStorage.setItem("userId", data.user._id)
       setTimeout(() => {
         navigate("/todolist")
       }, 2000);
