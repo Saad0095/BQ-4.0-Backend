@@ -40,7 +40,7 @@ export const markTodoDone = async (req, res) => {
       { isDone },
       { new: true }
     );
-    if (!deleted) res.json({ message: "Failed to Update todo!" });
+    if (!updatedTodo) res.json({ message: "Failed to Update todo!" });
     res.json(updatedTodo);
   } catch (error) {
     res.status(500).json({ error: error.message });
