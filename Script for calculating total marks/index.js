@@ -5,7 +5,7 @@ const folderPath =
   "E:\\Web Development (Coding)\\BQ 4.0 WD - 3 (Backend)\\Script for calculating total marks";
 const files = await fs.readdir(folderPath);
 
-await fs.writeFile("results.txt", "")
+await fs.writeFile("results.txt", "");
 const answers = [
   "A",
   "C",
@@ -46,7 +46,11 @@ for (const file of files) {
   const filePath = path.join(folderPath, file);
   const stat = await fs.stat(filePath);
 
-  if (stat.isFile()) {
+  if (
+    stat.isFile() &&
+    file.endsWith(".txt") &&
+    file !== "results.txt"
+  ) {
     const content = await fs.readFile(filePath, "utf-8");
     const studentAnswers = content
       .trim()
@@ -61,6 +65,6 @@ for (const file of files) {
       filename.charAt(0).toUpperCase() + filename.slice(1)
     }: ${score}/${answers.length}`;
     console.log(line);
-    await fs.appendFile("results.txt", line + "\n"); 
+    await fs.appendFile("results.txt", line + "\n");
   }
 }
