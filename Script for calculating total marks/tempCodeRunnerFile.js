@@ -1,1 +1,0 @@
-    filePath !== "results.txt"
