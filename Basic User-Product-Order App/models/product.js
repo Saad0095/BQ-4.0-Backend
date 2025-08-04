@@ -14,7 +14,7 @@ const productSchema = new Schema(
     price: { type: Number, required: true, min: 0 },
     rating: { type: Number, default: 0, min: 0, max: 5 },
     inStock: { type: Boolean, default: true },
-    images: { type: [String], required: true },
+    images: [{ type: String, required: true }],
   },
   { timestamps: true }
 );

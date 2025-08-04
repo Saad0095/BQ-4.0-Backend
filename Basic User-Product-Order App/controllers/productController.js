@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import { uploadImage } from "../utils/cloudinary.js";
 
 export const getAllProducts = async (req, res) => {
   try {
@@ -79,7 +80,19 @@ export const getProduct = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const productData = req.body;
+    const images = req.files;
+
+    if (!images || images.length === 0)
+      return res
+        .status(400)
+        .json({ error: "Atleast One Product Image is required!" });
+
+    productData.images = await Promise.all(
+      images.map((image) => uploadImage(image.path))
+    );
+
+    const product = await Product.create(productData);
     res.json(product);
   } catch (error) {
     if (error.name === "ValidationError") {
