@@ -15,7 +15,7 @@ export const uploadImage = async (imagePath) => {
   try {
     const result = await cloudinary.uploader.upload(imagePath, options);
     await fs.promises.unlink(imagePath);
-    console.log("Image's URL:", result.url);
+    // console.log("Image's URL:", result.url);
     return result.url;
   } catch (error) {
     console.error(error);
