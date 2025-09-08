@@ -1,0 +1,1 @@
+while using web socket, you should have a fallback (that should run when socket not subscribed)
