@@ -1,1 +1,3 @@
 while using web socket, you should have a fallback (that should run when socket not subscribed)
+
+SSE (Server Sent Events) -> light weight + only server can sent events to client
